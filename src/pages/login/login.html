@@ -1,0 +1,24 @@
+<ion-content  style="background: #2F2F2F;" padding>
+  	<div class="login">
+  		<div class="login-screen">
+  			<div class="app-title">
+  				<img src='assets/imgs/bollinger.png'/>
+  			</div>
+
+  			<div class="login-form">
+  				<div class="control-group">
+  				<input [(ngModel)]="email" type="email" class="input-login login-field " value="" placeholder="E-mail" id="login-name">
+  				<label class="login-field-icon fui-user" for="login-name"></label>
+  				</div>
+
+  				<div class="control-group">
+  				<input [(ngModel)]="password" type="password" class="input-login login-field " value="" placeholder="Mot de passe" id="login-pass">
+  				<label class="login-field-icon fui-lock" for="login-pass"></label>
+  				</div>
+
+  				<a class="btn btn-primary btn-large btn-block" (click)="login()">Connexion</a>
+  				<!-- <a class="login-link" (click)="resetPassword()">Mot de passe oublié ?</a> -->
+  			</div>
+  		</div>
+</div>
+</ion-content>
