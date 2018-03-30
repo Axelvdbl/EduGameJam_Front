@@ -1,17 +1,42 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
+  <ion-navbar color="dark">
+    <ion-title>
+      Dilemma
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only rigth (click)="logOut()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
-</ion-content>
+<ion-content padding style="background: #EFF0F1;">
+  <div padding>
+    <ion-segment color="dark" [(ngModel)]="subSettings">
+      <ion-segment-button value="home">
+        <ion-icon name="home"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="stats">
+				<ion-icon name="stats"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="subSettings">
+
+    <div *ngSwitchCase="'home'">
+
+      <ion-grid>
+        <ion-row>
+
+					<ion-card style="border-bottom: 2px solid #2F2F2F; border-radius: 10px; opacity:0.8">
+						<ion-card-content style="text-align: center; font-size: 20px">
+								Bonjour
+						</ion-card-content>
+					</ion-card>
+
+        </ion-row>
+      </ion-grid>
+
+    </div>

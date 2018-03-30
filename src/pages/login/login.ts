@@ -12,7 +12,9 @@ export class LoginPage {
   email:string = '';
   password:string = '';
 
-  constructor(private auth: AuthService, public navCtrl: NavController, public alertCtrl: AlertController, public loadingCtrl:LoadingController) {}
+  constructor(private auth: AuthService, public navCtrl: NavController, public alertCtrl: AlertController, public loadingCtrl:LoadingController) {
+		this.navCtrl.setRoot(HomePage);
+	}
 
   login() {
       let loader = this.loadingCtrl.create({
