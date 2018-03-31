@@ -4,6 +4,7 @@ import { HomePage } from '../home/home';
 import { AuthService } from '../../services/auth.service';
 import { DataService } from '../../services/data.service';
 
+import { Student } from './students/student'
 @Component({
   selector: 'page-channel',
   templateUrl: 'channel.html'
@@ -15,16 +16,12 @@ export class ChannelPage {
 	channels = {
 		id: null,
 		name: '',
-		isActive: false
+		is_active: false
 	}
 	name: string;
 	id: string;
 
-	students = {
-		id: null,
-		firstname: '',
-		lastname: '',
-	};
+	students: Student[];
 
   constructor(public navCtrl: NavController,
 							private data: DataService,
@@ -40,7 +37,7 @@ export class ChannelPage {
 			content: "Lancement de la partie"
 		});
 		loader.present();
-		this.channels.isActive = true;
+		this.channels.is_active = true;
 		this.data.putChannel(this.channels)
 							.subscribe(
 								data => {
@@ -61,7 +58,8 @@ export class ChannelPage {
 		this.data.getStudents(this.channels.id)
 							.subscribe(
 								data => {
-									this.students = data.body;
+									this.students = data.body
+									console.log(data.body);
 									loader.dismissAll();
 								},
 								error => {

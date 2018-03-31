@@ -33,6 +33,7 @@ export class QuestionsPage {
   }
 
   submit(){
+		console.log(this.question.value);
     this.postQuestion();
   }
 
@@ -42,7 +43,6 @@ export class QuestionsPage {
 		} else {
 			this.percent = false;
 		}
-		console.log(this.percent);
 	}
 
   postQuestion(){
@@ -50,7 +50,7 @@ export class QuestionsPage {
       content: "Veuillez patienter ..."
     });
     loader.present();
-    this.data.postQuestion(this.question)
+    this.data.postQuestion(this.question.value)
                     .subscribe(
                       success => {
 														this.navCtrl.pop();
