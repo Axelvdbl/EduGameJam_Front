@@ -8,7 +8,7 @@ export class AuthService {
 
   constructor (private http:Http) {}
 
-  private baseURL = 'http://localhost:3000/api/v1/auth';
+  private baseURL = 'https://staging-gj-api.herokuapp.com/api/v1/auth';
 
   login(email, password){
     let body = JSON.stringify({email: email, password: password });

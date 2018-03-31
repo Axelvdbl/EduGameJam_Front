@@ -29,7 +29,7 @@ export class DataService {
 		);
 	}
 
-	private baseURL = 'http://localhost:3000/api/v1/';
+	private baseURL = 'https://staging-gj-api.herokuapp.com/api/v1/';
 
 	/* Questions */
 
