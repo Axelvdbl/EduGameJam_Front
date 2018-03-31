@@ -12,7 +12,7 @@ import { AlertComponent } from '../../../components/alert.component';
 export class QuestionsPage {
 
 	title: string;
-	percent: string;
+	percent: boolean;
   private question : FormGroup;
   constructor(private loadingCtrl: LoadingController,
 							private toastCtrl: ToastController,
@@ -28,8 +28,7 @@ export class QuestionsPage {
 
   ngOnInit(){
       this.question = this.formBuilder.group({
-        title: ['', Validators.compose([Validators.required])],
-				percent: ['', Validators.required],
+        title: ['', Validators.compose([Validators.required])]
       });
   }
 
@@ -37,12 +36,21 @@ export class QuestionsPage {
     this.postQuestion();
   }
 
+	setPercent(bool) {
+		if (bool) {
+			this.percent = true;
+		} else {
+			this.percent = false;
+		}
+		console.log(this.percent);
+	}
+
   postQuestion(){
     let loader = this.loadingCtrl.create({
       content: "Veuillez patienter ..."
     });
     loader.present();
-    this.data.postQuestion(this.question.value)
+    this.data.postQuestion(this.question)
                     .subscribe(
                       success => {
 														this.navCtrl.pop();

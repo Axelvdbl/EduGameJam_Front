@@ -28,18 +28,39 @@
     <div *ngSwitchCase="'students'">
 			<div text-center>
 
-				<!-- <button large ion-button round center (click)="CreateChannel()">
-					Créer une session
-				</button> -->
+				<ion-card style="background-color: #2F2F2F">
+						<ion-card-content style="background-color: #2F2F2F">
+							<span ion-text style="text-align: center; color: white">
+								Liste d'élèves
+							</span>
+						</ion-card-content>
+				</ion-card>
 
-				<ion-card>
-					Liste d'élèves
+				<ion-card *ngFor="let question of questions">
+					<ion-card-content>
+						<span ion-item style="text-align: center">
+							{{student.firstname}} {{student.lastname}}
+						</span>
+					</ion-card-content>
 				</ion-card>
 
 				<ion-footer>
-					<button large ion-button round center (click)="Refresh()">
-						Rafraichir
-					</button>
+
+					<ion-card style="background-color: #2F2F2F" (click)="refresh()">
+							<ion-card-content style="background-color: #2F2F2F">
+								<span ion-text style="text-align: center; color: white">
+									Rafraichir
+								</span>
+							</ion-card-content>
+					</ion-card>
+
+					<ion-card style="background-color: #2F2F2F" (click)="start()">
+							<ion-card-content style="background-color: #2F2F2F">
+								<span ion-text style="text-align: center; color: white">
+									Démarrer la partie
+								</span>
+							</ion-card-content>
+					</ion-card>
 				</ion-footer>
 
 			</div>
@@ -48,8 +69,12 @@
 		<div *ngSwitchCase="'questions'">
 			<div text-center>
 
-				<ion-card>
-					Liste des questions
+				<ion-card style="background-color: #2F2F2F">
+						<ion-card-content style="background-color: #2F2F2F">
+							<span ion-text style="text-align: center; color: white">
+								Liste des questions
+							</span>
+						</ion-card-content>
 				</ion-card>
 
 			</div>

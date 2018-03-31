@@ -57,6 +57,24 @@ export class DataService {
 										.catch(this.handleError);
 	}
 
+	putChannel(channel) {
+	let body = JSON.stringify({ channel })
+	console.log(channel);
+	let options = new RequestOptions({ headers: this.headers });
+	return this.http.put(this.baseURL + 'channels/' + channel.id, body, options)
+									.map(this.extractData)
+									.catch(this.handleError);
+}
+
+	/*Students*/
+
+	getStudents(channel_id) {
+		let options = new RequestOptions({ headers: this.headers });
+		return this.http.get(this.baseURL + 'students?channels_id=' + channel_id, options)
+									.map(this.extractData)
+									.catch(this.handleError);
+	}
+
 	/* Handle response */
 
 	private extractData(res: Response) {

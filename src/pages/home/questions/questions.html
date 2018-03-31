@@ -1,23 +1,57 @@
 <ion-header>
   <ion-navbar color="dark">
-    <ion-title>AJOUTER UNE NOUVELLE QUESTION</ion-title>
+    <ion-title>Ajouter une nouvelle question</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <form [formGroup]="question" (ngSubmit)="submit()">
 
+		<ion-item style="margin-top: 15px; border-top: 5px solid #2F2F2F; border-bottom: 5px solid #2F2F2F">
+			Intitulé de la question:
+		</ion-item>
+
 		  <ion-item>
-	      <ion-label floating>Intitulé de la question</ion-label>
 	      <ion-input type="text" formControlName="title" required></ion-input>
 	    </ion-item>
 
-			<ion-item>
-				<ion-label floating>Variation des Réponses</ion-label>
-				<ion-input type="text" formControlName="percent" required></ion-input>
+			<ion-item style="margin-top: 15px; border-top: 5px solid #2F2F2F; border-bottom: 5px solid #2F2F2F">
+				Pourcentage d'influence:
+				<div *ngIf="percent == true" style="text-align:right">Vrai</div>
+				<div *ngIf="percent == false" style="text-align:right">Faux</div>
 			</ion-item>
 
-			<button ion-button type="submit" block color="dark">Enregistrer</button>
+			<ion-row>
+
+				<ion-col col-6 col-xs-6 col-sm-6 col-lg-6 col-xl-6>
+					<ion-card (click)="setPercent(false)">
+						<ion-card-content style="background-color: #FF4136; text-align: center">
+							<span ion-text style="color: black">
+								Faux
+							</span>
+						</ion-card-content>
+					</ion-card>
+				</ion-col>
+
+				<ion-col col-6 col-xs-6 col-sm-6 col-lg-6 col-xl-6>
+					<ion-card (click)="setPercent(true)">
+							<ion-card-content style="background-color: #2ECC40; text-align: center">
+								<span ion-text style="color: black">
+									Vrai
+								</span>
+							</ion-card-content>
+					</ion-card>
+				</ion-col>
+
+			</ion-row>
+
+			<ion-card style="background-color: #2F2F2F" (click)="submit()">
+					<ion-card-content style="background-color: #2F2F2F; text-align: center">
+						<span ion-text style="color: white">
+							Enregistrer
+						</span>
+					</ion-card-content>
+			</ion-card>
 
   </form>
 </ion-content>

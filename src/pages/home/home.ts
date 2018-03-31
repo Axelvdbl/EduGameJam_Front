@@ -6,6 +6,7 @@ import { Http } from '@angular/http';
 import { Channel } from './channels/channel';
 import { Question } from './questions/question';
 import { QuestionsPage } from './questions/questions';
+import { ChannelPage } from '../channel/channel';
 import { DataService } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
 import { LoginPage } from '../login/login';
@@ -19,7 +20,6 @@ export class HomePage {
 	subSettings: string = 'home';
 
 	channelActive: boolean = false;
-	// name: string;
 
 	questions: Question[];
 
@@ -27,9 +27,8 @@ export class HomePage {
 		id: null,
 		name: '',
 		teachers_id: localStorage.getItem('user_id'),
+		isStart: false
 	};
-
-	// channels: Channel[];
 
   constructor(public navCtrl: NavController,
 							private auth: AuthService,
@@ -68,13 +67,13 @@ export class HomePage {
 			content: "Veuillez patienter ..."
 		});
 		loader.present();
-		// this.channels.name = this.name;
 		this.data.postChannel(this.channels)
 								.subscribe(
 									data => {
 										this.channels = data.body;
 										console.log(this.channels);
 										loader.dismissAll();
+										this.navCtrl.push(ChannelPage, {name: this.channels.name, id: this.channels.id});
 									},
 									error => {
 										console.log(error);

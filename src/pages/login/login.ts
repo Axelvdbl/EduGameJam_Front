@@ -15,6 +15,7 @@ export class LoginPage {
 
   constructor(private auth: AuthService, public navCtrl: NavController, public alertCtrl: AlertController, public loadingCtrl:LoadingController) {
 		this.navCtrl.setRoot(HomePage);
+		// this.navCtrl.setRoot(ChannelPage);
 	}
 
   login() {

@@ -28,19 +28,26 @@
     <div *ngSwitchCase="'home'">
 			<div text-center>
 
-				<button large ion-button center (click)="CreateChannel()">
-					Créer une session
-				</button>
-
+				<ion-card style="background-color: #2F2F2F" (click)="CreateChannel()">
+						<ion-card-content style="background-color: #2F2F2F">
+							<span ion-text style="text-align: center; color: white">
+								Créer une Session
+							</span>
+						</ion-card-content>
+				</ion-card>
 				<div *ngIf="channelActive == true" style="padding-top: 1em">
 					<ion-item>
 						<ion-label floating>Nom de votre Session</ion-label>
 						<ion-input type="text" [(ngModel)]="channels.name"></ion-input>
 					</ion-item>
 
-					<button large ion-button center (click)="postChannel()">
-						Lancer la Session
-					</button>
+					<ion-card style="background-color: #2F2F2F" (click)="postChannel()">
+							<ion-card-content style="background-color: #2F2F2F">
+								<span ion-text style="text-align: center; color: white">
+									Lancer la Session
+								</span>
+							</ion-card-content>
+					</ion-card>
 
 				</div>
 
@@ -50,9 +57,13 @@
 		<div *ngSwitchCase="'questions'">
 			<div text-center>
 
-					<button large ion-button center (click)="presentQuestionModal()">
-						Soumettre une question
-					</button>
+						<ion-card style="background-color: #2F2F2F" (click)="presentQuestionModal()">
+								<ion-card-content style="background-color: #2F2F2F">
+									<span ion-text style="text-align: center; color: white">
+										Soumettre une question
+									</span>
+								</ion-card-content>
+						</ion-card>
 
           <ion-card *ngFor="let question of questions">
             <ion-card-content>
