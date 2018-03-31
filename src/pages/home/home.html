@@ -26,11 +26,24 @@
   <div [ngSwitch]="subSettings">
 
     <div *ngSwitchCase="'home'">
+			<div text-center>
 
-      <ion-grid>
-        <ion-row>
-					
-        </ion-row>
-      </ion-grid>
+				<button large ion-button round center (click)="CreateChannel()">
+					Créer une session
+				</button>
 
+			</div>
     </div>
+
+		<div *ngSwitchCase="'questions'">
+			<div text-center>
+
+				<button large ion-button round center (click)="SubmitQuestion()">
+					Soumettre une question
+				</button>
+
+			</div>
+    </div>
+
+	</div>
+</ion-content> -->
