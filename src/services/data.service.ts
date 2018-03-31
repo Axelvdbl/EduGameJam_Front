@@ -3,7 +3,9 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/timeout';
-
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class DataService {
@@ -29,13 +31,46 @@ export class DataService {
 
 	private baseURL = 'http://localhost:3000/api/v1/';
 
-	/* Products */
+	/* Questions */
 
-	// getProducts(user) {
-	// 	let options = new RequestOptions({ headers: this.headers });
-	// 	return this.http.get(this.baseURL + 'products?user_id=' + user, options)
-	// 								.map(this.extractData)
-	// 								.catch(this.handleError);
-	// }
+	getQuestions() {
+		let options = new RequestOptions({ headers: this.headers });
+		return this.http.get(this.baseURL + 'messages', options)
+									.map(this.extractData)
+									.catch(this.handleError);
+	}
+
+	postQuestion(message) {
+		let body = JSON.stringify({ message });
+		let options = new RequestOptions({ headers: this.headers });
+		return this.http.post(this.baseURL + 'messages', body, options)
+										.map(this.extractData)
+										.catch(this.handleError);
+	}
+
+	/* Channel */
+	postChannel(channel) {
+		let body = JSON.stringify({ channel });
+		let options = new RequestOptions({ headers: this.headers });
+		return this.http.post(this.baseURL + 'channels', body, options)
+										.map(this.extractData)
+										.catch(this.handleError);
+	}
+
+	/* Handle response */
+
+	private extractData(res: Response) {
+		let headers = res.headers
+		let body = res.json();
+		return {body: body, headers: headers} || { };
+	}
+
+	private handleError (error: any) {
+		// In a real world app, we might use a remote logging infrastructure
+		// We'd also dig deeper into the error to get a better message
+		let errMsg = (error.message) ? error.message :
+		error._body ? `${error._body}` : 'Server error';
+		return Observable.throw(errMsg);
+	}
 
 }

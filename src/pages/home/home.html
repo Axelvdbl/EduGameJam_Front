@@ -28,9 +28,21 @@
     <div *ngSwitchCase="'home'">
 			<div text-center>
 
-				<button large ion-button round center (click)="CreateChannel()">
+				<button large ion-button center (click)="CreateChannel()">
 					Créer une session
 				</button>
+
+				<div *ngIf="channelActive == true" style="padding-top: 1em">
+					<ion-item>
+						<ion-label floating>Nom de votre Session</ion-label>
+						<ion-input type="text" [(ngModel)]="channels.name"></ion-input>
+					</ion-item>
+
+					<button large ion-button center (click)="postChannel()">
+						Lancer la Session
+					</button>
+
+				</div>
 
 			</div>
     </div>
@@ -38,12 +50,24 @@
 		<div *ngSwitchCase="'questions'">
 			<div text-center>
 
-				<button large ion-button round center (click)="SubmitQuestion()">
-					Soumettre une question
-				</button>
+					<button large ion-button center (click)="presentQuestionModal()">
+						Soumettre une question
+					</button>
+
+          <ion-card *ngFor="let question of questions">
+            <ion-card-content>
+              <span ion-item style="text-align: center">
+                {{question.title}}
+              </span>
+            </ion-card-content>
+          </ion-card>
+
+					<div *ngIf="questions.length == 0">
+						Pas de questions disponible pour le moment !
+					</div>
 
 			</div>
     </div>
 
 	</div>
-</ion-content> -->
+</ion-content>

@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>AJOUTER UNE NOUVELLE QUESTION</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="question" (ngSubmit)="submit()">
+
+		  <ion-item>
+	      <ion-label floating>Intitulé de la question</ion-label>
+	      <ion-input type="text" formControlName="title" required></ion-input>
+	    </ion-item>
+
+			<ion-item>
+				<ion-label floating>Variation des Réponses</ion-label>
+				<ion-input type="text" formControlName="percent" required></ion-input>
+			</ion-item>
+
+			<button ion-button type="submit" block color="dark">Enregistrer</button>
+
+  </form>
+</ion-content>
