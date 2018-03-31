@@ -10,10 +10,14 @@ import { Ng2CableModule } from 'ng2-cable';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ChannelPage } from '../pages/channel/channel';
+import { QuestionsPage } from '../pages/home/questions/questions';
 import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
 
+import { AlertComponent } from '../components/alert.component';
+
 import { AuthService } from '../services/auth.service';
+import { DataService } from '../services/data.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,9 @@ import { AuthService } from '../services/auth.service';
 		HomePage,
 		LoginPage,
     ChannelPage,
-    TabsPage
+    TabsPage,
+    QuestionsPage,
+		AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +38,7 @@ import { AuthService } from '../services/auth.service';
       monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
       dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
     }),
+		Ng2CableModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -39,10 +46,13 @@ import { AuthService } from '../services/auth.service';
 		HomePage,
 		LoginPage,
     ChannelPage,
+    QuestionsPage,
     TabsPage
   ],
   providers: [
 		AuthService,
+		DataService,
+		AlertComponent,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

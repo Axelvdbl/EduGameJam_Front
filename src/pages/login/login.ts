@@ -14,7 +14,7 @@ export class LoginPage {
   password:string = '';
 
   constructor(private auth: AuthService, public navCtrl: NavController, public alertCtrl: AlertController, public loadingCtrl:LoadingController) {
-		this.navCtrl.setRoot(ChannelPage);
+		this.navCtrl.setRoot(HomePage);
 	}
 
   login() {
