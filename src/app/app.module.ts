@@ -9,6 +9,7 @@ import { Ng2CableModule } from 'ng2-cable';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { ChannelPage } from '../pages/channel/channel';
 import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -18,7 +19,8 @@ import { AuthService } from '../services/auth.service';
   declarations: [
     MyApp,
 		HomePage,
-    LoginPage,
+		LoginPage,
+    ChannelPage,
     TabsPage
   ],
   imports: [
@@ -35,7 +37,8 @@ import { AuthService } from '../services/auth.service';
   entryComponents: [
     MyApp,
 		HomePage,
-    LoginPage,
+		LoginPage,
+    ChannelPage,
     TabsPage
   ],
   providers: [

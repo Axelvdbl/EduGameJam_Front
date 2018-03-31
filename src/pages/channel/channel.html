@@ -14,7 +14,7 @@
 <ion-content padding style="background: #EFF0F1;">
   <div padding>
     <ion-segment color="dark" [(ngModel)]="subSettings">
-      <ion-segment-button value="home">
+      <ion-segment-button value="students">
         <ion-icon name="md-copy"></ion-icon>
       </ion-segment-button>
       <ion-segment-button value="questions">
@@ -23,14 +23,24 @@
     </ion-segment>
   </div>
 
-  <div [ngSwitch]="subSettings">
+	<div [ngSwitch]="subSettings">
 
-    <div *ngSwitchCase="'home'">
+    <div *ngSwitchCase="'students'">
 			<div text-center>
 
-				<button large ion-button round center (click)="CreateChannel()">
+				<!-- <button large ion-button round center (click)="CreateChannel()">
 					Créer une session
-				</button>
+				</button> -->
+
+				<ion-card>
+					Liste d'élèves
+				</ion-card>
+
+				<ion-footer>
+					<button large ion-button round center (click)="Refresh()">
+						Rafraichir
+					</button>
+				</ion-footer>
 
 			</div>
     </div>
@@ -38,9 +48,9 @@
 		<div *ngSwitchCase="'questions'">
 			<div text-center>
 
-				<button large ion-button round center (click)="SubmitQuestion()">
-					Soumettre une question
-				</button>
+				<ion-card>
+					Liste des questions
+				</ion-card>
 
 			</div>
     </div>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { ChannelPage } from '../channel/channel';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class LoginPage {
   password:string = '';
 
   constructor(private auth: AuthService, public navCtrl: NavController, public alertCtrl: AlertController, public loadingCtrl:LoadingController) {
-		this.navCtrl.setRoot(HomePage);
+		this.navCtrl.setRoot(ChannelPage);
 	}
 
   login() {
