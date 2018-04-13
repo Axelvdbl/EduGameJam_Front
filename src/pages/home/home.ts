@@ -22,6 +22,11 @@ export class HomePage {
 	channelActive: boolean = false;
 
 	questions: Question[];
+	favorites: Question[];
+	filteredItems = [];
+	fav: boolean = false;
+	fav_id: number;
+	all: boolean = false;
 
 	channels = {
 		id: null,
@@ -38,25 +43,91 @@ export class HomePage {
 							private modalCtrl: ModalController,
 							private events: Events) {
 		this.getQuestions();
+		this.getFavorites();
   }
 
+	/*questions*/
+
+	getFavorites() {
+		this.data.getFavorites()
+							.subscribe(
+								data => {
+									this.favorites = data.body;
+									this.filteredItems = this.favorites;
+									if (this.favorites.length == this.questions.length)
+										this.all = true;
+									else
+										this.all = false;
+								},
+								error => {
+									console.log(error)
+								}
+							)
+	}
+
+	isFav(question_id) {
+			for (let favorite of this.favorites) {
+				if (question_id == favorite.id)
+					return (true);
+		}
+		return (false);
+	}
+
+	addFavorite(id) {
+		this.data.postFavorite(localStorage.getItem('user_id'), id)
+										.subscribe(
+											success => {
+												this.getFavorites();
+											},
+											error => {
+												console.log(error);
+											}
+										)
+	}
+
+	removeFavorite(id) {
+		this.data.getOneFavorite(id, localStorage.getItem('user_id'))
+										.subscribe(
+											success => {
+												this.fav_id = success.body[0].id;
+												this.data.deleteFavorite(this.fav_id)
+																				.subscribe(
+																					success => {
+																						this.getFavorites();
+																					},
+																					error => {
+																						console.log(error);
+																					}
+																				)
+
+											},
+											error => {
+													console.log(error);
+											}
+										)
+	}
+
+	change(state) {
+		if (state == 0)
+			this.fav = true;
+		else
+			this.fav = false;
+	}
+
 	getQuestions() {
-		let loader = this.loadingCtrl.create({
-			content: "Veuillez patienter ..."
-		});
-		loader.present();
 		this.data.getQuestions()
 							.subscribe(
 								data => {
 									this.questions = data.body;
-									loader.dismissAll();
+									this.filteredItems = this.questions;
 								},
 								error => {
 									console.log(error)
-									loader.dismissAll();
 								}
 							)
 	}
+
+	/*chanel*/
 
 	CreateChannel() {
 		this.channelActive = true;
@@ -71,7 +142,6 @@ export class HomePage {
 								.subscribe(
 									data => {
 										this.channels = data.body;
-										console.log(this.channels);
 										loader.dismissAll();
 										this.navCtrl.push(ChannelPage, {name: this.channels.name, id: this.channels.id});
 									},
@@ -85,6 +155,7 @@ export class HomePage {
 	presentQuestionModal() {
 		let modal = this.modalCtrl.create(QuestionsPage, {});
 		modal.onDidDismiss(data => {
+			this.getFavorites();
 			this.getQuestions();
 		});
 		modal.present();

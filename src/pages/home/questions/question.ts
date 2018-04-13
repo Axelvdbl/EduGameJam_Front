@@ -2,6 +2,6 @@ export class Question{
 
   id: number;
   title: string;
-	percent: string;
+	percent: boolean;
 
 }

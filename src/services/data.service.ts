@@ -29,7 +29,8 @@ export class DataService {
 		);
 	}
 
-	private baseURL = 'https://staging-gj-api.herokuapp.com/api/v1/';
+	private baseURL = 'https://prod-gj.herokuapp.com/api/v1/';
+	// private baseURL = 'http://localhost:3000/api/v1/';
 
 	/* Questions */
 
@@ -40,8 +41,8 @@ export class DataService {
 									.catch(this.handleError);
 	}
 
-	postQuestion(message) {
-		let body = JSON.stringify({ message });
+	postQuestion(message, percent) {
+		let body = JSON.stringify({ title: message.title, percent: percent });
 		let options = new RequestOptions({ headers: this.headers });
 		return this.http.post(this.baseURL + 'messages', body, options)
 										.map(this.extractData)
@@ -49,6 +50,7 @@ export class DataService {
 	}
 
 	/* Channel */
+
 	postChannel(channel) {
 		let body = JSON.stringify({ channel });
 		let options = new RequestOptions({ headers: this.headers });
@@ -71,6 +73,41 @@ export class DataService {
 	getStudents(channel_id) {
 		let options = new RequestOptions({ headers: this.headers });
 		return this.http.get(this.baseURL + 'students?channels_id=' + channel_id, options)
+									.map(this.extractData)
+									.catch(this.handleError);
+	}
+
+	/*Favorites*/
+
+	getFavorites() {
+		let id = localStorage.getItem('user_id');
+		let options = new RequestOptions({ headers: this.headers });
+		return this.http.get(this.baseURL + 'favorites?teacher_id=' + id, options)
+									.map(this.extractData)
+									.catch(this.handleError);
+	}
+
+	getOneFavorite(message_id, teacher_id) {
+		let options = new RequestOptions({ headers: this.headers });
+		return this.http.get(this.baseURL + 'favorites?teacher_id=' + teacher_id + "&message_id=" + message_id, options)
+									.map(this.extractData)
+									.catch(this.handleError);
+	}
+
+	postFavorite(user, question) {
+		console.log(question);
+		let body = JSON.stringify({ teacher_id: user, message_id: question });
+		console.log(body);
+		let options = new RequestOptions({ headers: this.headers });
+		return this.http.post(this.baseURL + 'favorites', body, options)
+										.map(this.extractData)
+										.catch(this.handleError);
+	}
+
+	deleteFavorite(id) {
+		console.log(id);
+		let options = new RequestOptions({ headers: this.headers });
+		return this.http.delete(this.baseURL + 'favorites/' + id, options)
 									.map(this.extractData)
 									.catch(this.handleError);
 	}

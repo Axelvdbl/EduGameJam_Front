@@ -14,6 +14,8 @@ import { QuestionsPage } from '../pages/home/questions/questions';
 import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
 
+import { SearchQuestionPipe } from '../pipe/searchQuestion.pipe';
+
 import { AlertComponent } from '../components/alert.component';
 
 import { AuthService } from '../services/auth.service';
@@ -27,6 +29,7 @@ import { DataService } from '../services/data.service';
     ChannelPage,
     TabsPage,
     QuestionsPage,
+		SearchQuestionPipe,
 		AlertComponent
   ],
   imports: [

@@ -1,3 +1,29 @@
 page-home {
 
 }
+
+.true {
+	position: absolute;
+	top: 0.8em;
+	left: 0;
+	right: 0;
+	width: 5em;
+	margin: auto;
+	text-align: center;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	background-color: #2ECC40;
+}
+
+.false {
+	position: absolute;
+	top: 0.8em;
+	left: 0;
+	right: 0;
+	width: 5em;
+	margin: auto;
+	text-align: center;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	background-color: #FF4136;
+}

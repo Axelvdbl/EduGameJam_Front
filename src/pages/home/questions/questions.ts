@@ -13,6 +13,8 @@ export class QuestionsPage {
 
 	title: string;
 	percent: boolean;
+	quest: boolean;
+	id: number;
   private question : FormGroup;
   constructor(private loadingCtrl: LoadingController,
 							private toastCtrl: ToastController,
@@ -26,14 +28,32 @@ export class QuestionsPage {
 							private alertCtrl: AlertController) {
   }
 
+	onChange(){
+		this.quest = !this.quest;
+	}
+
+	postFavorite() {
+		this.data.postFavorite(localStorage.getItem('user_id'), this.id)
+										.subscribe(
+											success => {
+											},
+											error => {
+												console.log(error);
+											}
+										)
+	}
+
   ngOnInit(){
       this.question = this.formBuilder.group({
         title: ['', Validators.compose([Validators.required])]
       });
   }
 
+	return() {
+		this.navCtrl.pop();
+	}
+
   submit(){
-		console.log(this.question.value);
     this.postQuestion();
   }
 
@@ -50,11 +70,14 @@ export class QuestionsPage {
       content: "Veuillez patienter ..."
     });
     loader.present();
-    this.data.postQuestion(this.question.value)
+    this.data.postQuestion(this.question.value, this.percent)
                     .subscribe(
                       success => {
 														this.navCtrl.pop();
-														this.presentToast('Question créé avec succès')
+														this.id = success.body.id;
+														if (this.quest)
+															this.postFavorite();
+														this.presentToast('Question créée avec succès')
 														loader.dismissAll();
                     	},
                     	error => {
